@@ -1,0 +1,177 @@
+<html>
+<head>
+<style>
+body{
+	color:#333333;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	z-index:-2;
+}
+
+h2{
+	color:#C00;
+	font-size:2em;
+	line-height:.5em;
+	position:relative;
+		left:-20px;
+	
+}
+
+h3{
+	color:#039;
+	font-size:1.5em;;
+	padding-bottom:-10;
+}
+
+h4{
+	color:#009;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size: 1.5em;
+}
+
+textarea{
+	padding:0px;
+	margin:0px;
+}
+
+.coded{
+	font-family:'Lucida Console', Monaco, monospace;
+	font-size:14px;
+	color:#009933;
+}
+
+.pin-email{
+	padding-left: 30%;
+}
+
+.img{
+	position: relative;
+		top:20px;
+		left:20px
+}
+
+code{
+	font-family:"Courier New", Courier, monospace;
+	font-size:.8em;
+}
+
+.text{
+	max-width:600px;
+}
+
+ul{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:.8em;
+	list-style:none;
+}
+
+#helper{
+	position:absolute;
+	top:5px;
+	left:20%;
+}
+</style>
+
+<script type="text/javascript">
+function scrub() {
+	
+	var subj = document.getElementById('encode-s').value;
+	var pre = document.getElementById('encode-p').value;
+	var fp = document.getElementById('encode-fp').value;
+	
+	var subRepl = [ ['\u0027', '&amp;#39;'], ['\u2122', '=?UTF-8?Q?=e2=84=a2?='], ['\u00AE', '=?UTF-8?Q?=c2=ae?='], ['\u201c', '=?UTF-8?Q?=c2=ae?='], ['\u201c', '&amp;#34;'], ['\u201D', '&amp;#34;'], ['\u2018', '&amp;#39;'], ['\u2019', '&amp;#39;'], ['\u00D8', '=?UTF-8?Q?=c3=98?='], ['\u00F8', '=?UTF-8?Q?=c3=b8?='], ['\u2022', '&amp;#2022;'], ['\u003E', '&amp;#62;'], ['\u2015', '--'], ['\u2014', '--'], ['\u2013', '--'], ['\u2012', '--'], ['\u2011', '-'], ['\u2010', '-'] ];
+	
+	var preFpRepl = [ ['\u0027', '&amp;#39;'], ['\u2122', '&amp;#153;'], ['\u00AE', '&amp;#174;'], ['\u201c', '&amp;#34;'], ['\u201c', '&amp;#34;'], ['\u201D', '&amp;#34;'], ['\u2018', '&amp;#39;'], ['\u2019', '&amp;#39;'], ['\u00D8', '&amp;#216;'], ['\u00F8', '&amp;#248;'], ['\u2022', '&amp;#2022;'], ['\u003E', '&amp;#62;'], ['\u2015', '--'], ['\u2014', '--'], ['\u2013', '--'], ['\u2012', '--'], ['\u2011', '-'], ['\u2010', '-'] ];
+		 
+	
+	if (subj!="") {
+		subRepl.forEach(function(pair) {
+     			subj = subj.split(pair[0]).join(pair[1]);
+			});
+		
+		document.myform.outputtext1.value = subj;
+	} else {
+		document.getElementById('outputtext1').value = 'Subject Line output area';
+	}
+	
+	if(pre!="") {
+		 preFpRepl.forEach(function(pair) {
+     		pre = pre.split(pair[0]).join(pair[1]);
+			});
+		document.myform.outputtext2.value = pre;
+	} else {
+		document.getElementById('outputtext2').value = 'Pre-Header output area';
+	}
+		
+	if(fp!="") {
+		 preFpRepl.forEach(function(pair) {
+				fp = fp.split(pair[0]).join(pair[1]);
+			});
+		document.myform.outputtext3.value = fp;
+	} else {
+		document.getElementById('outputtext3').value = 'Fineprint output area';
+	}
+	
+}
+
+function clean() {
+	var subj = '';
+	var pre = '';
+	var fp = '';
+	document.getElementById('outputtext1').value = 'Subject Line output area';
+	document.getElementById('outputtext2').value = 'Pre-Header output area';
+	document.getElementById('outputtext3').value = 'Fineprint output area';
+	document.getElementById('encode-s').value = '';
+	document.getElementById('encode-p').value = '';
+	document.getElementById('encode-fp').value = '';
+	document.getElementById('outputtext').value = '';	
+}
+
+function help() {
+	document.getElementById('helper').innerHTML="<div style=\"padding:15px;margin:5px;background:#fff;border:solid 1px #000;z-index:100;\"><strong>Non-Traditional characters can be used in the subject line that GarE and this tool will not \"scrb\".<br>In order to do so you must use a specific encoding style as highlighted here.</strong><br><br>For an extensive list of special characters you can refer to this page:<br><a href='http://utf8-characters.com/' target='_blank'>UTF-8 Characters</a><br><br>To use these characters you will need the Hexadecimal values similar to the ones highlighted in this snapshot:<br><img src='capture.png'><br><br>Make sure to use pairs of the hexadecimal value characters, separated by equal signs within the special string of characters:<br><img src='capture3.png'><br><br>The '<strong>=?UTF-8?Q?=</strong>' encodes the values, and the '<strong>?=</strong>' stops the encoding.<br><br>Place these codes into the subject line like so:<br><img src='capture2.png'><br><input id=\"have\" type=\"button\" onClick=\"helped()\" value=\"Hide Help\"></div>";
+	document.getElementById("need").style.visibility="hidden";
+	document.getElementById("have").style.visibility="visible";
+}
+
+function helped() {
+	document.getElementById('helper').innerHTML="";
+	document.getElementById("have").style.visibility="hidden";
+	document.getElementById("need").style.visibility="visible";
+}
+
+</script>
+</head>
+
+<body>
+<div class="pin-email">
+<form name="myform" onSubmit="return false;">
+<h2>CheetahMail Subject line / Preheader / Fineprint Encoder<br></h2><br>
+<h3>Subject line:</h3>
+<textarea cols="40" rows="1" id="encode-s"></textarea>
+<h3>Pre-Header:</h3>
+<textarea cols="40" rows="1" id="encode-p"></textarea>
+<h3>Fine Print:</h3>
+<textarea cols="40" rows="3" id="encode-fp"></textarea>
+<br><br>
+<input type="button" onClick="scrub()" value="Scrub" style="position:relative; float:left;">
+<input type="button" onClick="clean()" value="Clear" style="position:relative; float:left;">
+<input id="need" type="button" onClick="help()" value="Show Help" style="position:absolute; float:left;">
+<input id="have" type="button" onClick="helped()" value="Hide Help" style="position:absolute; float:left; visibility:hidden;">
+<br><br><br>
+<strong>CheetahMail encoded Subject Line:<br><br></strong>
+<textarea id= "outputtext1" name="outputtext1" style="width: 400px; height: 60px; background:#ededed; color:#333;">Subject Line output area
+</textarea><br><br>
+<strong>Preheaded HTML for email:<br><br></strong>
+<textarea id= "outputtext2" name="outputtext2" style="width: 400px; height: 60px; background:#ededed; color:#333;">Pre-Header output area
+</textarea>
+<br><br>
+<strong>Encoded Fineprint for Email:<br><br></strong>
+<textarea id= "outputtext3" name="outputtext3" style="width: 400px; height: 60px; background:#ededed; color:#333;">Fineprint output area
+</textarea>
+</form>
+<div id="helper"></div>
+
+</div>
+</html>
+
+
