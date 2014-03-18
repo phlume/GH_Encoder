@@ -79,16 +79,15 @@ function scrub() {
 	var pre = document.getElementById('encode-p').value;
 	var fp = document.getElementById('encode-fp').value;
 	
-	var subRepl = [ ['\u0027', '&amp;#39;'], ['\u2122', '=?UTF-8?Q?=e2=84=a2?='], ['\u00AE', '=?UTF-8?Q?=c2=ae?='], ['\u201c', '=?UTF-8?Q?=c2=ae?='], ['\u201c', '&amp;#34;'], ['\u201D', '&amp;#34;'], ['\u2018', '&amp;#39;'], ['\u2019', '&amp;#39;'], ['\u00D8', '=?UTF-8?Q?=c3=98?='], ['\u00F8', '=?UTF-8?Q?=c3=b8?='], ['\u2022', '&amp;#2022;'], ['\u003E', '&amp;#62;'], ['\u2015', '--'], ['\u2014', '--'], ['\u2013', '--'], ['\u2012', '--'], ['\u2011', '-'], ['\u2010', '-'] ];
+	var subRepl = [ ['\u0027', '&amp;#39;'], ['\u2122', '=?UTF-8?Q?=e2=84=a2?='], ['\u00AE', '=?UTF-8?Q?=c2=ae?='],	['\u201c', '=?UTF-8?Q?=c2=ae?='], ['\u201c', '&amp;#34;'], ['\u201D', '&amp;#34;'], ['\u2018', '&amp;#39;'], ['\u2019', '&amp;#39;'], ['\u00D8', '=?UTF-8?Q?=c3=98?='], ['\u00F8', '=?UTF-8?Q?=c3=b8?='], ['\u2022', '&amp;#2022;'],	['\u003E', '&amp;#62;'], ['\u2015', '--'], ['\u2014', '--'], ['\u2013', '--'], ['\u2012', '--'], ['\u2011', '-'], ['\u2010', '-'] ];
 	
-	var preFpRepl = [ ['\u0027', '&amp;#39;'], ['\u2122', '&amp;#153;'], ['\u00AE', '&amp;#174;'], ['\u201c', '&amp;#34;'], ['\u201c', '&amp;#34;'], ['\u201D', '&amp;#34;'], ['\u2018', '&amp;#39;'], ['\u2019', '&amp;#39;'], ['\u00D8', '&amp;#216;'], ['\u00F8', '&amp;#248;'], ['\u2022', '&amp;#2022;'], ['\u003E', '&amp;#62;'], ['\u2015', '--'], ['\u2014', '--'], ['\u2013', '--'], ['\u2012', '--'], ['\u2011', '-'], ['\u2010', '-'] ];
+	var preFpRepl = [ ['\u0027', '&amp;#39;'], ['\u2122', '&amp;#153;'], ['\u00AE', '&amp;#174;'], ['\u201c', '&amp;#34;'],	['\u201c', '&amp;#34;'], ['\u201D', '&amp;#34;'], ['\u2018', '&amp;#39;'], ['\u2019', '&amp;#39;'],['\u00D8', '&amp;#216;'], ['\u00F8', '&amp;#248;'], ['\u2022', '&amp;#2022;'], ['\u003E', '&amp;#62;'],	['\u2015', '--'], ['\u2014', '--'], ['\u2013', '--'], ['\u2012', '--'], ['\u2011', '-'], ['\u2010', '-'] ];
 		 
 	
 	if (subj!="") {
 		subRepl.forEach(function(pair) {
      			subj = subj.split(pair[0]).join(pair[1]);
 			});
-		
 		document.myform.outputtext1.value = subj;
 	} else {
 		document.getElementById('outputtext1').value = 'Subject Line output area';
@@ -111,7 +110,6 @@ function scrub() {
 	} else {
 		document.getElementById('outputtext3').value = 'Fineprint output area';
 	}
-	
 }
 
 function clean() {
