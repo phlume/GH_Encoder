@@ -7,9 +7,8 @@ GH Subject Line Encoder
 Using an array of values to split/join the string input, this utilitie provides quick subject line "scrubbing" for encoded elements. This is not an exhaustive tool and at the moment only encodes a handful of elements, the hope is that over time it can be more exhaustive.
 
 
-
 ### Acknowledgements###
-**Special Thanks** to GH for providing me with the void for which this filled.
+**Special Thanks** to [GH](http://www.garnethill.com) for providing me with the void for which this filled.
 Thank you to all who have, and might still, contribute(d) to this project.
 
 
